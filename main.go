@@ -19,6 +19,10 @@ func main() {
 		go checkLink(link, c)
 	}
 	fmt.Println(<-c)
+	fmt.Println(<-c)
+	fmt.Println(<-c)
+	fmt.Println(<-c)
+	fmt.Println(<-c)
 }
 
 func checkLink(link string, c chan string) {
@@ -26,10 +30,10 @@ func checkLink(link string, c chan string) {
 
 	if err != nil {
 		fmt.Println(link, "connection failure")
-		c <- "connection failure"
+		c <- "connection failure!"
 		return
 	}
 
 	fmt.Println(link, "connection success")
-	c <- "connection success"
+	c <- "connection success!"
 }
