@@ -19,9 +19,10 @@ func main() {
 		go checkLink(link, c)
 	}
 
-	for i := 0; i < len(links); i++ {
-		fmt.Println(i, <-c)
+	for { // while
+		go checkLink(<-c, c)
 	}
+
 }
 
 func checkLink(link string, c chan string) {
@@ -29,10 +30,10 @@ func checkLink(link string, c chan string) {
 
 	if err != nil {
 		fmt.Println(link, "connection failure")
-		c <- "connection failure!"
+		c <- link
 		return
 	}
 
 	fmt.Println(link, "connection success")
-	c <- "connection success!"
+	c <- link
 }
