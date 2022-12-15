@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func main() {
@@ -13,14 +14,17 @@ func main() {
 		"https://www.google.com/webhp?hl=zh-TW",
 	}
 
-	c := make(chan string) // 建立字串類型的channels
+	c := make(chan string)
 
 	for _, link := range links {
 		go checkLink(link, c)
 	}
 
-	for l := range c { // 等待channels 返回，在用切片跑回圈
-		go checkLink(l, c)
+	for l := range c {
+		go func() { // js, php: anonmous function; go: function literal; python:lambda
+			time.Sleep(5 * time.Second)
+			checkLink(l, c)
+		}()
 	}
 
 }
