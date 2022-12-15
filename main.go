@@ -21,10 +21,10 @@ func main() {
 	}
 
 	for l := range c {
-		go func() { // js, php: anonmous function; go: function literal; python:lambda
+		go func(link string) { // js, php: anonmous function; go: function literal; python:lambda
 			time.Sleep(5 * time.Second)
-			checkLink(l, c)
-		}()
+			checkLink(link, c)
+		}(l)
 	}
 
 }
