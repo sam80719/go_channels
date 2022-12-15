@@ -19,8 +19,8 @@ func main() {
 		go checkLink(link, c)
 	}
 
-	for { // while
-		go checkLink(<-c, c)
+	for l := range c { // 等待channels 返回，在用切片跑回圈
+		go checkLink(l, c)
 	}
 
 }
